@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8">
+	<title>Computer Wish List</title>
+</head>
+<body>
+	<h1>Computer Wish List</h1>
+
+	<section>
+	<form method="post" action="" id="baseForm">
+	<fieldset>
+	<legend>Add Order:</legend>
+		<input type="hidden" name="action" value="add_order" />
+
+		<div>						
+		<label for="customerName">User Name </label>
+			<input name="customerName" type="text" maxlength="255" value=""/> 
+			{% if message %}
+    		<font color= "red">{{ message }}</font>
+			{% endif %}
+		</div>
+		<br>
+		<div>
+		<label for="processorClass">Processor </label>
+		<select name="processorClass"> 
+			<option value="" selected></option>
+			<option value="i7" >i7</option>
+			<option value="i5" >i5</option>
+			<option value="i3" >i3</option>
+		</select>
+		</div>
+		<br>
+		<div>
+		<label for="graphics">Graphics Card</label>
+			<input type="radio" name="graphics" value="SLI">SLI
+			<input type="radio" name="graphics" value="Crossfire">Crossfire
+			<input type="radio" name="graphics" value="single">Single Card
+		</div>
+		<br>
+		<div>
+		<label for="ssd">SSD?</label>
+			<input type="checkbox" name="ssd" value="Yes">Yes
+  			<input type="checkbox" name="ssd" value="No">No
+		</div>
+		<br>
+		<div>
+		<label for="extras">Any extra features you want?</label>
+			<textarea name="extras" form="baseForm" rows="5" cols="50"></textarea>
+		</div>
+		<br>
+		<input type="submit" value="Add Entry" /> 
+	</fieldset>
+	</form>
+	</section>
+
+	<br>
+
+	{% if orders %}
+	<table border="1">
+		<tr>
+    		<th>Customer User Name</th>
+    		<th>Processor</th> 
+    		<th>Graphics Card</th>
+    		<th>SSD?</th>
+    		<th>Extras</th>
+    		<th></th>
+    		<th></th>	
+  		</tr>
+
+  		{% for x in orders %}
+  		<tr>
+    		<td>{{ x.customerName|e }}</td>
+    		<td>{{ x.processorClass|e }}</td> 
+    		<td>{{ x.graphics|e }}</td>
+    		<td>{{ x.ssd|e }}</td>
+    		<td>{{ x.extras|e }}</td>
+    		<td><a href="/edit?key={{ x.key }}">Edit</a></td>
+    		<td><a href="/delete?key={{ x.key }}" onclick="return confirm('Are you sure?');">Delete</a></td>
+  		</tr>
+  		{% endfor %}
+  		
+	</table>
+
+	{% endif %}
+
+
+	</body>
+</html>

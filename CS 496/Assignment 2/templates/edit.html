@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8">
+	<title>Edit Order</title>
+</head>
+<body>
+<h1>Edit Order</h1>
+	<br>
+	<section>
+	<form method="get" action="" enctype="multipart/form-data" name="baseForm">
+	<input type="hidden" name="action" value="edit_order" />
+	<input type="hidden" name="key" value="{{ order_key }}" />
+	<fieldset>
+	<legend>Edit Order:</legend>						
+		<label for="customerName">First Name </label>
+			<input name="customerName" type="text" maxlength="255" value="{{ order.customerName }}"/> 
+			{% if message %}
+    		<font color= "red">{{ message }}</font>
+			{% endif %}
+		<br>
+		<label for="processorClass">Processor </label>
+		<select name="processorClass"> 		
+			<option value="i7" {% if order.processorClass == "i7" %} selected="selected" {% endif %}>i7</option>
+			<option value="i5" {% if order.processorClass == "i5" %}selected="selected" {% endif %}>i5</option>
+			<option value="i3" {% if order.processorClass == "i3" %}selected="selected" {% endif %}>i3</option>	
+		</select> 
+		<br>
+		<label for="graphics">Graphics Card</label>
+			<input type="radio" name="graphics" value="SLI" {% if order.graphics == "SLI" %} checked {% endif %}>SLI
+			<input type="radio" name="graphics" value="Crossfire" {% if order.graphics == "Crossfire" %} checked {% endif %}>Crossfire
+			<input type="radio" name="graphics" value="Single" {% if order.graphics == "Single" %} checked {% endif %}>Single
+		<br>
+		<label for="ssd">SSD?</label>
+			<input type="checkbox" name="ssd" value="Yes" {% if order.ssd == "Yes" %} checked {% endif %}>Yes
+  			<input type="checkbox" name="ssd" value="No" {% if order.ssd == "No" %} checked {% endif %}>No
+		{{ order.ssd }}
+		<br>
+		<label for="extras">Extras</label>
+			<input type="text" name="extras" value="{{ order.extras }}"/>
+		<br>
+		<input type="submit" value="Save Changes" /> 
+		<button style="background-color:lightblue"><a href="/">BACK</a></button> 
+	</fieldset>
+	</form>
+	</section>
+	</body>
+</html>
