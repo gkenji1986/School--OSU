@@ -1,0 +1,229 @@
+#!/bin/bash
+
+# Program 1: Stats
+# CS 344 Operating Systems
+# Created by: Grant Nakashima
+# Date Due: 01/25/16
+#
+# Assignment Description: Write a bash shell script ot compute
+# statistics. The purpose is to get familiar with Unix shell, shell
+# programming, Unix utilities, standard input, output, and error
+# pipelines, process ids, exit values, and signals. The program will
+# calculate averages and medians from an input file of numbers or from
+# stdin. The file will have whole numbers that are separated by tabs 
+# and each line in the file will have the same number of values. The 
+# script will find the average and median for the numbers in the row
+# and column of the file. 
+
+
+# Temp file names with ids and trap #
+
+tmp_file=$$_tmp
+
+trap "rm -f $tmp_file; exit 1" INT HUP TERM
+
+# Variables #
+
+input_file=""
+error="Can't read $2"
+
+# Functions #
+
+usage_message()
+{
+	echo "Usage: \""$0" {-rows|-cols} [file]\""
+	exit 1
+};
+
+#reference: http://stackoverflow.com/questions/2422712/c-rounding-integer-division-instead-of-truncating
+#reference: http://forum.linuxcareer.com/threads/1645-Calculate-column-average-using-bash-shell
+#reference: http://stackoverflow.com/questions/1886157/a-simple-small-shell-script-to-compute-averages
+#reference: http://stackoverflow.com/questions/12938508/how-to-find-every-number-in-a-row-and-store-average-in-separate-per-row-variable
+#reference: http://unix.stackexchange.com/questions/184863/what-is-the-meaning-of-ifs-n-in-bash-scripting
+#reference: http://mindspill.net/computing/linux-notes/using-the-bash-ifs-variable-to-make-for-loops-split-with-non-whitespace-characters/
+#reference: https://oregonstate.instructure.com/courses/1568418/discussion_topics/7647429
+
+calculate_rows()
+{
+	#print labels
+echo -e "Average\tMedian"
+#receive numbers with loop
+	while read line
+	do
+		row_nums=($line)
+		average=0
+		median=0
+		mid_position=0
+		row_sum=0
+		columns=${#row_nums[@]}
+
+		#receive the average of the numbers in the row
+		for (( i=0;i<${#row_nums[@]};i++ ))
+		do
+			average=$(expr $average + ${row_nums[$i]} )
+		done
+
+		#calculate the average
+		divisor=$(expr $columns / 2 )
+		average=$(expr $average + $divisor)
+
+		average=$(expr $average / $columns)
+		mid_position=$(expr $columns / 2 )
+		sort_nums=($(printf '%s\n' "${row_nums[@]}"|sort -g))
+		column_mod=$(expr $columns % 2)
+		if [ $(($column_mod)) -eq 0 ]
+		then
+			mid_position=$(expr $mid_position - 1 )
+			if [[ "row_nums[$mid_position]" < "row_nums[$mid_position+1]" ]]
+			then
+				mid_position=$(expr $mid_position + 1 )
+			fi
+		fi
+
+		#calculate the median by getting the middle number in the array
+		median=$(expr ${sort_nums[$mid_position]})
+		#show results
+		echo -e "$average \t $median"
+	done<$input_file 
+};
+
+#reference: http://linuxconfig.org/how-to-count-number-of-columns-in-csv-file-using-bash-shell
+#reference: http://www.cyberciti.biz/tips/how-to-generating-print-range-sequence-of-numbers.html
+#reference: http://unix.stackexchange.com/questions/80017/how-to-count-total-number-of-words-in-a-file
+#reference:http://stackoverflow.com/questions/21603555/command-to-count-occurrences-of-word-in-entire-file
+#reference: http://unix.stackexchange.com/questions/80017/how-to-count-total-number-of-words-in-a-file
+#reference: Tushar, Shantanu.,  Lakshman, Sarah., 2013. Linux Shell Scripting Cookbook. Birmingham Second Edition, UK: Packt Publishing Ltd. 
+#reference: http://www.linuxquestions.org/questions/linux-newbie-8/sed-append-string-in-variable-to-last-line-of-file-913741/
+#reference: http://forum.linuxcareer.com/threads/1645-Calculate-column-average-using-bash-shell?s=ed6f48fb0b421ed7300a488fdd8087aa
+#reference: http://stackoverflow.com/questions/33095764/reading-column-and-find-median-bash
+#reference: http://ahmed.amayem.com/bash-passing-whitespace-as-parameters-to-functions/
+calculate_columns()
+{   
+	read line<$input_file
+	count=$(echo "$line" | wc -w)
+  
+	echo "Averages:"
+	
+	#loop to determine each individual average
+	for ((i=0; i<${count}; i++));
+	do
+		sum=0
+    		lineCount=0
+    		num_store=$(echo -e "\n")
+
+    		#read each line
+    		while read -a line 
+    		do
+      			num="${line[$i]}"
+ 
+     			 #find sum
+      			sum=$(expr $sum + $num)
+
+      			#build a string to help calculate the median
+      			num_store=$(echo -e "$num\n$num_store")
+			#calculate number of lines for median
+      			lineCount=$(expr $lineCount + 1)
+     
+    		done < $input_file
+
+    		#put numbers into array for median
+    		temp_array[$i]=$num_store
+
+		#calculate floor of number to determine fraction
+		#needed to get all numbers correct in p1cleantestscript
+		floor=$(expr $sum / $lineCount)
+
+  		#figure out significant digit for rounding
+		#reference: http://askubuntu.com/questions/179898/how-to-round-decimals-using-bc-in-bash
+  		fraction=$(expr $sum \* 10 / $lineCount - $floor \* 10)
+
+  		#round up or down depeding on fraction
+  		if [[ $fraction -ge 5 ]]
+  		then
+			#round up
+    			average=$(expr $floor + 1)
+  		else
+			#round down
+    			average=$floor
+  		fi
+	
+    		echo -ne "$average\t"
+ 	 done
+ 
+  	#calculate median
+  	echo -e "\nMedians:"
+  
+  	for ((i=0; i<${count}; i++));
+  	do
+    		#receive and store number in array from average
+    		num_store="${temp_array[$i]}"
+
+    		#calculate the divisor for truncating
+	  	divisor=$(expr $lineCount / 2 + 1)
+
+  		#receive median from stored numbers
+		median=$(echo "$num_store" | sort -n | cut -d$'\n' -f ${divisor}- | head -1)
+    		#print median
+    		echo -ne "$median\t"  
+  	done
+	
+	echo -e "\n"
+}; 
+
+#reference: http://stackoverflow.com/questions/15330402/dev-stdin-with-herestring
+#reference: http://stackoverflow.com/questions/6980090/how-to-read-from-file-or-stdin-in-bash
+#reference: http://stackoverflow.com/questions/19570413/bash-how-to-pipe-input-to-while-loop-and-preserve-variables-after-loop-ends
+
+calculate_stdin()
+{
+	while read line
+	do
+		echo -e "$line" >> $tmp_file
+	
+	done < /dev/stdin
+	
+	input_file=$tmp_file
+};
+
+#reference: http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-6.html
+#reference: http://www.thegeekstuff.com/2010/06/bash-if-statement-examples/
+
+# Main #
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]
+then
+	usage_message
+	exit 1
+fi
+#make sure file is properly called and working
+if [[ "$2" == "" ]] 
+then
+	calculate_stdin
+elif [[ "$2" != "" ]]
+then
+	if [ ! -r "$2" ] 
+	then
+		echo $error >&2
+		exit 1
+	else
+		input_file=$2
+	fi
+else	
+	calculate_stdin
+fi
+
+#if stataments to determine which function to call
+if [[ "$1" == -r* ]] 
+then	
+	calculate_rows
+elif [[ "$1" == -c* ]] 
+then
+	calculate_columns
+else
+	usage_message
+	exit 1
+fi
+
+#clean temp files
+rm -f $tmp_file
+
+exit 0
