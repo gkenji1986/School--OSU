@@ -1,0 +1,26 @@
+legend
+{
+	color: blue;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 150%;
+}
+
+body
+{
+	background: yellow;
+}
+
+form input[type='text'] 
+{
+	position: relative;
+    display: block;
+    margin : 0 auto;
+}
+
+form input[type='submit'] 
+{
+	position: relative;
+    display: block;
+    margin : 0 auto;
+}

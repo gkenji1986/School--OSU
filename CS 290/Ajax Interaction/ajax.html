@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="ajax.css">
+<html>
+  <head>
+   <script src="ajax.js"></script>
+  </head>
+  <body>
+    <form>
+        <fieldset>
+			<legend> Find Weather by City Name or Zip Code </legend>
+			<label for= "textInput"></label>
+			<input type="text" name="textInput" id="textInput"><br>
+			<input type="submit" id="textSubmit">
+        </fieldset>
+	</form>
+    <div>
+      <h2>Results</h2>
+      <ul>
+		<li><span style="font-weight: bold;">Name: </span><span id="name"></span></li>
+		<li><span style="font-weight: bold;">Weather Description: </span><span id="descrip"></span></li>
+        <li><span style="font-weight: bold;">Latitude: </span><span id="lat"></span></li>
+        <li><span style="font-weight: bold;">Longitude: </span><span id="lon"></span></li>
+		<li><span style="font-weight: bold;">Temperature: </span><span id="temp"></span></li>
+		<li><span style="font-weight: bold;">Sea Level: </span><span id="sea"></span></li>
+		<li><span style="font-weight: bold;">Pressure: </span><span id="pressure"></span></li>
+        <li><span style="font-weight: bold;">Humidity: </span><span id="humid"></span></li>
+        <li><span style="font-weight: bold;">Temp Max: </span><span id="tempMax"></span></li>
+		<li><span style="font-weight: bold;">Temp Min: </span><span id="tempMin"></span></li>
+		<li><span style="font-weight: bold;">Wind Degree: </span><span id="windDeg"></span></li>
+        <li><span style="font-weight: bold;">Wind Speed: </span><span id="windSpeed"></span></li>
+      </ul>
+    </div>
+  </body>
+</html>

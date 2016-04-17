@@ -1,0 +1,13 @@
+<h1>{{reqType}} Request Received:</h1>
+<ul>
+	{{#if isGet}}
+		{{#each dataList}}
+			<li>{{this.val1}}:{{this.val2}}
+		{{/each}}
+		
+	{{else}}
+		{{#each dataList}}
+			<li>{{this.val1}}:{{this.val2}}
+		{{/each}}
+	{{/if}}
+</ul>
