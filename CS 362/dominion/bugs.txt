@@ -1,0 +1,53 @@
+*******************Assignment 2*******************************
+smithyCard(): Change the trashFlag from 0 to 1 in the discardCard() call. 
+	      Changed from discardCard(handPos, currentPlayer, state, 0); to discardCard(handPos, currentPlayer, state, 1);
+
+adventurerCard(): In the last while loop's condition, change z-1>=0 to z-1>0. 
+		Changed from 
+		
+		while (z >= 0)
+		{
+			state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z]; // discard all cards in play that have been drawn
+			z = z - 1;
+		}
+		
+		to
+
+		while (z > 0)
+		{
+			state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z]; // discard all cards in play that have been drawn
+			z = z - 1;
+		}
+
+greathallCard(): Removed the ++ increment. Changed from state->numActions++; to state->numActions;
+
+embargoCard(): Move increment operator inside the brackets rather to change the indices rather than the value at the index.
+		Changed from state->embargoTokens[choice1]++; to state->embargoTokens[choice1++];
+
+cutpurseCard(): No bugs introduced. 
+
+********************Assignment 3****************************
+
+Adventurer bugs:
+	- the deck count and discard count is not correct. 
+
+Smithy bug:
+	- no bugs were found. tests need to get adjusted to trigger bug for flag change
+
+Great Hall bug:
+	- The number of actions bug was caught. The card should give the user another action (giving the user 2 actions )so the when the number of actions was decremented it should be 1.
+
+Village bug:
+	- no bugs were found. I ran tests against a card that was not changed by me. Was looking to see if basic tests would find bugs.
+
+Buy card bug:
+	- no bugs found
+
+Get cost bug:
+	- no bugs found
+
+Shuffle bug:
+	- no bugs found 
+
+Is game over bug:
+	- no bugs found
