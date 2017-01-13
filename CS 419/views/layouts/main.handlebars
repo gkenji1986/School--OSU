@@ -1,0 +1,94 @@
+<html>
+<head>
+
+    <title>Santa Defender</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body{{#if game}} onload="init()"{{/if}}>
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Santa Defender</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/highscore">Highscores</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+            {{#if user}}
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profile">Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/signout">Sign out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="navbar-text navbar-right">Logged in: {{user.display}}</p>
+            {{else}}
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+            {{/if}}
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+        {{/if}}
+        {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+        {{/if}}
+        {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+        {{{ body }}}
+    </div>
+
+    
+    <!--createjs lib-->
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/easystar.min.js"></script>
+    <!--App-->
+    {{#if game}} 
+	<script src="/js/load.js"></script>
+	<script src="/js/assets.js"></script>
+	<script src="/js/helpers.js"></script>
+	<script src="/js/building.js"></script>
+	<script src="/js/enemy.js"></script>
+	<script src="/js/zombie1.js"></script>
+    <script src="/js/grinch.js"></script>
+    <script src="/js/critters.js"></script>
+    <script src="/js/msclaus.js"></script>
+	<script src="/js/tower.js"></script>
+    <script src="/js/frosty.js"></script>
+    <script src="/js/santa.js"></script>
+    <script src="/js/reindeer.js"></script>
+    <script src="/js/bullet.js"></script>
+    <script src="/js/present.js"></script>
+    <script src="/js/snowball.js"></script>
+    <script src="/js/ice_bolt.js"></script>
+    <script src="/js/ornament.js"></script>
+    <script src="/js/elves.js"></script>
+	<script src="/js/hud.js"></script>
+	<script src="/js/game.js"></script>
+	<script src="/js/board.js"></script>
+    <script src="/js/waves.js"></script>
+        {{#if user}}
+        <script>
+            var user = "{{{user.email}}}";
+        </script>
+        {{/if}}
+    {{/if}}
+</body>
+</html>

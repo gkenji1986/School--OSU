@@ -1,0 +1,236 @@
+#game {
+  position: absolute;
+  left: 100px;
+  width: 1152px;
+  height: 640px;
+  background-image: url(../img/star_wars_background.jpg);
+}
+
+#canvas {
+
+  background-color: white;
+}
+
+h6 {
+   margin: 0;
+    background: red;
+    color: white;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+}
+
+.opening{
+    color: yellow;
+}
+
+h4 {
+	margin: 0;
+    background: green;
+    color: white;
+	position: absolute;
+    font-size: 300%;
+	top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+}
+
+h3{
+    font-size: 36px;
+    color: green;
+
+}
+
+h2{
+    font-size: 48px;
+    color: green;
+
+}
+
+.bullet{
+    color: black;
+    font-size: 24px;
+}
+#hud {
+  position: absolute;
+  width: 1152px;
+  height: 100px;
+  background: #004d00;
+  color: white;
+}
+
+.table-content{
+    font-size:24px;
+}
+
+.table-header{
+    font-size:36px;
+    color:green;
+}
+
+.about-p{
+    margin: 0;
+    color: black;
+    font-size: 24px;
+}
+.about-c{
+    background-image: url(../img/SnowyBackground.jpg);
+}
+.jumbotron{
+  background-image: url(../img/SnowyBackground.jpg);
+}
+
+.jumbotron h2{
+    color: green;
+    font-size: 80px;
+}
+
+.jumbotron small{
+    color: green;
+}
+.add-buttons {
+  position: absolute;
+  display: inline-block;
+  left: 300px;
+  height: 100px;
+  background: #004d00;
+  border-style: solid;
+ }
+
+.add-button {
+  display: inline-block;
+  max-width: 100px;
+  margin: 10px;
+  margin-top: 0;
+  height: 90px;
+  background-color: #004d00;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+.add-button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Star wars scrolling text referenced from 
+https://www.sitepoint.com/css3-starwars-scrolling-text/
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+
+p#start
+{
+  position: relative;
+  width: 16em;
+  font-size: 200%;
+  font-weight: 400;
+  margin: 20% auto;
+  color: #fd0101;
+  opacity: 0;
+  z-index: 1;
+  -webkit-animation: intro 1s ease-out;
+  -moz-animation: intro 1s ease-out;
+  -ms-animation: intro 1s ease-out;
+  -o-animation: intro 1s ease-out;
+  animation: intro 1s ease-out;
+}
+
+@-webkit-keyframes intro {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-moz-keyframes intro {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-ms-keyframes intro {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-o-keyframes intro {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes intro {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#titles
+{
+  position: absolute;
+  width: 18em;
+  height: 50em;
+  bottom: 0;
+  left: 50%;
+  margin-left: -9em;
+  font-size: 350%;
+  font-weight: bold;
+  text-align: justify;
+  overflow: hidden;
+  transform-origin: 50% 100%;
+  transform: perspective(300px) rotateX(25deg);
+}
+
+#titles:after
+{
+  position: absolute;
+  content: ' ';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 60%;
+  background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+#titlecontent
+{
+  position: absolute;
+  top: 100%;
+  -webkit-animation: scroll 100s linear 2s infinite;
+  -moz-animation: scroll 100s linear 2s infinite;
+  -ms-animation: scroll 100s linear 2s infinite;
+  -o-animation: scroll 100s linear 2s infinite;
+  animation: scroll 100s linear 2s infinite;
+}
+
+/* animation */
+@-webkit-keyframes scroll {
+  0% { top: 100%; }
+  100% { top: -170%; }
+}
+
+@-moz-keyframes scroll {
+  0% { top: 100%; }
+  100% { top: -170%; }
+}
+
+@-ms-keyframes scroll {
+  0% { top: 100%; }
+  100% { top: -170%; }
+}
+
+@-o-keyframes scroll {
+  0% { top: 100%; }
+  100% { top: -170%; }
+}
+
+@keyframes scroll {
+  0% { top: 100%; }
+  100% { top: -170%; }
+}

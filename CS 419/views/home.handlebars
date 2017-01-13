@@ -1,0 +1,36 @@
+<section id="game" class="row">
+        <div id="scroller">
+            <p id="start">Santa Defender</p>
+            <audio loop id="opening" src="sound/Star_Wars_Theme.ogg"></audio>
+            <div id="titles">
+                <div id="titlecontent">
+                    <p class="opening">Santa was flying over head, when he noticed a puttering of smoke under the bonnet of his sleigh.</p>
+                    <p class="opening">So, Santa pulled over in a nearby galaxy so, he would not be spotted by human beings, to further conceal his existence (even though we all know he is real).</p>
+                    <p class="opening">Little did he know, the galaxy he pulled over in, was a treacherous land filled with present hungry zombie creatures.</p>
+                    <p class="opening">Luckily, he had with him defenses to stave off their attacks.</p>
+                    <p class="opening">Now as part of the Secret Otherwordly League of Elves to defend his equipment and presents, so Santa can take off and continue with his journey.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="gameCanvas">
+            <canvas id="canvas" width="1152" height="640"></canvas>
+            <h6 id="percent" >Loading:</h6>
+            <h4 id="waveIndicator"></h4>
+            <div id="hud">
+                <div>Lives: <span id="lives"></span></div>
+                <div>Gold: <span id="gold"></span></div>
+                <div>Waves: <span id="waves"></span></div>
+                <div>Score: <span id="score"></span></div>
+            </div>
+            <div class="add-buttons">
+                <a class="add-button" id="CCTower1" title="CCTower1" data-type="CCTower1"></a>
+                <a class="add-button" id="CCTower2" title="Reindeer" data-type="Reindeer"></a>
+                <a class="add-button" id="YetiTower1" title="Frosty" data-type="Frosty">Frosty</a>
+                <a class="add-button" id="YetiTower2" title="Elves" data-type="Elves">Elves</a>
+                <a class="add-button" id="Santa" title="Santa" data-type="Santa">Santa</a>
+                <a type="button" id="Settings" title="Settings" onclick="game.settings()">Settings</a>
+            </div>
+        </div>
+
+</section>

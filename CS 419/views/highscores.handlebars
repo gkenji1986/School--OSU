@@ -1,0 +1,21 @@
+<div class="about-c">
+    <div class="jumbotron">
+        <h1>High Score</h1>
+    </div>
+    <br>
+    <div>
+        <table>
+            <thead>
+                <td class="table-header" style="column-span: 2">Score from highest</td>
+            </thead>
+            <tbody>
+                {{#each scores}}
+                <tr>
+                    <td class="table-content"><b>Name: </b> {{by.display}}</td>
+                    <td class="table-content"><b>Score: </b> {{score}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
